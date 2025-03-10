@@ -45,7 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Main>{children}</Main>
       <Footer />
       <WhatsAppButton 
-        href="https://wa.me/447514003077" 
+        href="https://wa.me/37068516842" 
         target="_blank" 
         rel="noopener noreferrer"
         aria-label="Contact us on WhatsApp"
