@@ -209,9 +209,17 @@ const ContactPage: React.FC = () => {
           appPassword: 'mysi okbf jzwy ohya'
         }),
       })
-      .catch(err => console.error('Failed to send contact form:', err))
-      .finally(() => {
-        setIsSubmitting(false);
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(data => {
+            console.error('Contact form error:', data);
+            throw new Error('Failed to send contact form');
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Contact form success:', data);
         setSubmitSuccess(true);
         setFormData({
           name: '',
@@ -225,6 +233,13 @@ const ContactPage: React.FC = () => {
         setTimeout(() => {
           setSubmitSuccess(false);
         }, 5000);
+      })
+      .catch(err => {
+        console.error('Failed to send contact form:', err);
+        alert('There was an error sending your message. Please try again later.');
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
     }
   };

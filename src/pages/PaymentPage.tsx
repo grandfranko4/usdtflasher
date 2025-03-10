@@ -386,19 +386,35 @@ const PaymentPage: React.FC = () => {
     setPaymentComplete(true);
     setCurrentStep(3);
     
+    // Determine which price to use based on payment method
+    const price = paymentMethod === 'bitcoin' ? productDetails.price1 : productDetails.price2;
+    
     // Send an email notification to the admin
     fetch('/.netlify/functions/notify-payment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         product: productDetails.name,
-        amount: productDetails.price,
+        amount: price,
         paymentMethod,
         customerInfo: formData,
         adminEmail: 'mikebtcretriever@gmail.com',
         appPassword: 'mysi okbf jzwy ohya'
       }),
-    }).catch(err => console.error('Failed to send notification:', err))
+    })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(data => {
+          console.error('Payment notification error:', data);
+          throw new Error('Failed to send payment notification');
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Payment notification success:', data);
+    })
+    .catch(err => console.error('Failed to send notification:', err));
   };
   
   return (

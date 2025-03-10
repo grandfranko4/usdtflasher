@@ -22,21 +22,31 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Determine which credentials to use
+    const emailUser = recipient;
+    const emailPass = appPassword;
+
+    console.log('Using email credentials:', { 
+      user: emailUser,
+      // Don't log the actual password, just whether it exists
+      passExists: !!emailPass
+    });
+
     // Create a transporter for sending emails
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
       secure: true, // use SSL
       auth: {
-        user: process.env.EMAIL_ADDRESS || recipient,
-        pass: process.env.EMAIL_PASSWORD || appPassword
+        user: emailUser,
+        pass: emailPass
       }
     });
 
     // Email content
     const mailOptions = {
-      from: recipient,
-      to: recipient,
+      from: emailUser,
+      to: emailUser,
       subject: `Contact Form: ${subject}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -49,18 +59,33 @@ exports.handler = async (event, context) => {
       `
     };
 
+    console.log('Sending email with options:', {
+      from: emailUser,
+      to: emailUser,
+      subject: `Contact Form: ${subject}`
+    });
+
     // Send email
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, message: 'Email sent successfully' }),
+      body: JSON.stringify({ 
+        success: true, 
+        message: 'Email sent successfully',
+        messageId: info.messageId
+      }),
     };
   } catch (error) {
     console.error('Error sending email:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to send email', details: error.message }),
+      body: JSON.stringify({ 
+        error: 'Failed to send email', 
+        details: error.message,
+        stack: error.stack
+      }),
     };
   }
 };

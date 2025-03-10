@@ -15,12 +15,32 @@ exports.handler = async (event, context) => {
     const { product, amount, paymentMethod, customerInfo, adminEmail, appPassword } = data;
 
     // Validate required fields
-    if (!product || !amount || !paymentMethod || !customerInfo || !adminEmail || !appPassword) {
+    if (!product || !paymentMethod || !customerInfo || !adminEmail || !appPassword) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'Missing required fields' }),
+        body: JSON.stringify({ 
+          error: 'Missing required fields',
+          receivedData: {
+            hasProduct: !!product,
+            hasAmount: !!amount,
+            hasPaymentMethod: !!paymentMethod,
+            hasCustomerInfo: !!customerInfo,
+            hasAdminEmail: !!adminEmail,
+            hasAppPassword: !!appPassword
+          }
+        }),
       };
     }
+
+    // Determine which credentials to use
+    const emailUser = adminEmail;
+    const emailPass = appPassword;
+
+    console.log('Using email credentials:', { 
+      user: emailUser,
+      // Don't log the actual password, just whether it exists
+      passExists: !!emailPass
+    });
 
     // Create a transporter for sending emails
     const transporter = nodemailer.createTransport({
@@ -28,40 +48,55 @@ exports.handler = async (event, context) => {
       port: 465,
       secure: true, // use SSL
       auth: {
-        user: process.env.EMAIL_ADDRESS || adminEmail,
-        pass: process.env.EMAIL_PASSWORD || appPassword
+        user: emailUser,
+        pass: emailPass
       }
     });
 
     // Email content
     const mailOptions = {
-      from: adminEmail,
-      to: adminEmail,
+      from: emailUser,
+      to: emailUser,
       subject: `New Payment: ${product}`,
       html: `
         <h2>New Payment Received</h2>
         <p><strong>Product:</strong> ${product}</p>
-        <p><strong>Amount:</strong> ${amount}</p>
+        <p><strong>Amount:</strong> ${amount || 'Not specified'}</p>
         <p><strong>Payment Method:</strong> ${paymentMethod}</p>
         <h3>Customer Information:</h3>
-        <p><strong>Name:</strong> ${customerInfo.name}</p>
-        <p><strong>Email:</strong> ${customerInfo.email}</p>
+        <p><strong>Name:</strong> ${customerInfo.name || 'Not provided'}</p>
+        <p><strong>Email:</strong> ${customerInfo.email || 'Not provided'}</p>
         <p><strong>Phone:</strong> ${customerInfo.phone || 'Not provided'}</p>
       `
     };
 
+    console.log('Sending payment notification email with options:', {
+      from: emailUser,
+      to: emailUser,
+      subject: `New Payment: ${product}`
+    });
+
     // Send email
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Payment notification email sent successfully:', info.messageId);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true, message: 'Payment notification sent successfully' }),
+      body: JSON.stringify({ 
+        success: true, 
+        message: 'Payment notification sent successfully',
+        messageId: info.messageId
+      }),
     };
   } catch (error) {
     console.error('Error sending payment notification:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to send payment notification', details: error.message }),
+      body: JSON.stringify({ 
+        error: 'Failed to send payment notification', 
+        details: error.message,
+        stack: error.stack
+      }),
     };
   }
 };
