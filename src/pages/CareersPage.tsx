@@ -205,9 +205,9 @@ const CareersPage: React.FC = () => {
   return (
     <Layout>
       <SEO
-        title="Careers | USDT FLASHER PRO"
-        description="Join our team at USDT FLASHER PRO. Explore current job openings and learn about our company culture and benefits."
-        keywords="careers, jobs, employment, blockchain jobs, cryptocurrency careers, USDT flasher jobs"
+        title="Flash USDT trust wallet | USDT FLASHER PRO"
+        description="Join our team at USDT FLASHER PRO. Explore current job openings and learn about our flash USDT trust wallet Partnership and flash usdt binance partnership."
+        keywords="flash usdt trust wallet, flash usdt binance, flash usdt binance p2p, flash usdt download, flash usdt software, USDT flasher jobs"
       />
       
       <Section

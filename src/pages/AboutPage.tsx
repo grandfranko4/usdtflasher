@@ -92,9 +92,9 @@ const AboutPage: React.FC = () => {
   return (
     <Layout>
       <SEO
-        title="About Us | USDT FLASHER PRO"
-        description="Learn about the team behind USDT FLASHER PRO and our mission to provide the most reliable USDT flashing software in the market."
-        keywords="USDT flasher, about us, team, mission, vision, cryptocurrency, blockchain"
+        title="Flash USDT trc20 | USDT FLASHER PRO"
+        description="Learn about the team behind flash USDT trc20 and our mission to provide the most reliable USDT flashing software in the market."
+        keywords="flash usdt trc20, mission, USDT flasher, about us, flash usdt software, flash usdt binance p2p, flash usdt binance"
       />
       
       <Section

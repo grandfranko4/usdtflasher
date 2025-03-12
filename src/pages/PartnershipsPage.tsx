@@ -218,9 +218,9 @@ const PartnershipsPage: React.FC = () => {
   return (
     <Layout>
       <SEO
-        title="Partnerships | USDT FLASHER PRO"
-        description="Partner with USDT FLASHER PRO and grow your business. Explore our affiliate program, reseller opportunities, and more."
-        keywords="partnerships, affiliate program, reseller program, business opportunities, USDT flasher partners"
+        title="Flash USDT trc20 Trust wallet | USDT FLASHER PRO"
+        description="Flash USDT PRO integrates well with Flash USDT trc20 Trust wallet, flash usdt binance p2p, and more."
+        keywords="Flash USDT trc20 Trust wallet, flash usdt binance p2p, flash usdt binance, flash usdt trust wallet, USDT flasher partners"
       />
       
       <Section

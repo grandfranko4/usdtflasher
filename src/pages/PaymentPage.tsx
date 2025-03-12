@@ -420,9 +420,9 @@ const PaymentPage: React.FC = () => {
   return (
     <Layout>
       <SEO
-        title="Payment | USDT FLASHER PRO"
-        description="Complete your purchase of USDT FLASHER PRO. Secure payment options available."
-        keywords="payment, checkout, buy USDT flasher, crypto payment, bitcoin, USDT"
+        title="Flash USDT download | USDT FLASHER PRO"
+        description="Complete your purchase of USDT FLASHER PRO. Secure payment options available. Flash USDT download"
+        keywords="Flash USDT download, flash usdt software, buy USDT flasher, crypto payment, bitcoin, USDT"
       />
       
       <Section
