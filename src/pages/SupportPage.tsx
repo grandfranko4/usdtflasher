@@ -223,6 +223,7 @@ const SupportPage: React.FC = () => {
         title="Support | USDT FLASHER PRO"
         description="Get help and support for USDT FLASHER PRO. Find answers to frequently asked questions, contact our support team, or access our knowledge base."
         keywords="support, help, FAQ, customer service, USDT flasher support, troubleshooting"
+        canonicalUrl="https://usdtflasher.pro/support"
       />
       
       <Section

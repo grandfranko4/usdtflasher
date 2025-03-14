@@ -95,6 +95,7 @@ const AboutPage: React.FC = () => {
         title="Flash USDT trc20 | USDT FLASHER PRO"
         description="Learn about the team behind flash USDT trc20 and our mission to provide the most reliable USDT flashing software in the market."
         keywords="flash usdt trc20, mission, USDT flasher, about us, flash usdt software, flash usdt binance p2p, flash usdt binance"
+        canonicalUrl="https://usdtflasher.pro/about"
       />
       
       <Section

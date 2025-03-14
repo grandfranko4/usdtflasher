@@ -53,6 +53,7 @@ const DisclaimerPage: React.FC = () => {
         title="Disclaimer | USDT FLASHER PRO"
         description="Read our disclaimer for USDT FLASHER PRO. Understand the risks and limitations associated with using our software."
         keywords="disclaimer, legal notice, risk disclosure, USDT flasher disclaimer, liability limitations"
+        canonicalUrl="https://usdtflasher.pro/disclaimer"
       />
       
       <Section

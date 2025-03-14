@@ -53,6 +53,7 @@ const RefundPage: React.FC = () => {
         title="Refund Policy | USDT FLASHER PRO"
         description="Learn about our refund policy for USDT FLASHER PRO software. Understand the conditions and process for requesting a refund."
         keywords="refund policy, money back, return policy, USDT flasher refund, purchase refund"
+        canonicalUrl="https://usdtflasher.pro/refund"
       />
       
       <Section

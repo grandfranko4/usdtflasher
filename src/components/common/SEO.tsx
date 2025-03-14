@@ -4,9 +4,10 @@ interface SEOProps {
   title: string;
   description: string;
   keywords?: string;
+  canonicalUrl?: string;
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description, keywords }) => {
+const SEO: React.FC<SEOProps> = ({ title, description, keywords, canonicalUrl }) => {
   // In a real application, we would use react-helmet-async here
   // But for simplicity, we'll just update the document title directly
   React.useEffect(() => {
@@ -34,7 +35,20 @@ const SEO: React.FC<SEOProps> = ({ title, description, keywords }) => {
         document.head.appendChild(meta);
       }
     }
-  }, [title, description, keywords]);
+    
+    // Handle canonical URL
+    if (canonicalUrl) {
+      let linkCanonical = document.querySelector('link[rel="canonical"]');
+      if (linkCanonical) {
+        linkCanonical.setAttribute('href', canonicalUrl);
+      } else {
+        linkCanonical = document.createElement('link');
+        linkCanonical.setAttribute('rel', 'canonical');
+        linkCanonical.setAttribute('href', canonicalUrl);
+        document.head.appendChild(linkCanonical);
+      }
+    }
+  }, [title, description, keywords, canonicalUrl]);
   
   return null;
 };

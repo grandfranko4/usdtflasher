@@ -423,6 +423,7 @@ const PaymentPage: React.FC = () => {
         title="Flash USDT download | USDT FLASHER PRO"
         description="Complete your purchase of USDT FLASHER PRO. Secure payment options available. Flash USDT download"
         keywords="Flash USDT download, flash usdt software, buy USDT flasher, crypto payment, bitcoin, USDT"
+        canonicalUrl="https://usdtflasher.pro/payment"
       />
       
       <Section
